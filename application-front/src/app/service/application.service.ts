@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { User } from '../model/user.model';
+import { Project } from '../model/project.model';
 
 
 
@@ -43,11 +44,19 @@ export class ApplicationService {
    * -> Il faut s'inspirer des fonctions ci-dessus
    */
 
+  saveProjects(id: number,name: string, amount: number,  description: string, ownerUsername: string): Observable<Project> {
+    const url = this.baseUrl + '/save';
+    return this.http.post<Project>(url, { id, name, amount, description, ownerUsername }, this.httpOptions)
+  }
+
+  getProjects(id: number,name: string, amount: number,  description: string, ownerUsername: string): Observable<Project> {
+    const url = this.baseUrl + '/projects';
+    return this.http.get<Project>(url, {responseType: 'json'})
+  }
+
   getUsers(): Observable<any> {
     return this.http.get(`${this.placeholder}/users`);
   }
 
-  saveProject() { }
-  getProjects() { }
 
 }
