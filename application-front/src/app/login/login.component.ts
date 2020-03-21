@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApplicationService } from '../service/application.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   username: FormControl;
   password: FormControl;
+  errorMsg;
 
   constructor(private applicationService: ApplicationService, private router: Router) {
     this.username = new FormControl('', Validators.required);
@@ -36,7 +39,14 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['/home']);
       Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
-    });
+    }, (error) => {
+      if (error! instanceof HttpErrorResponse) {
+        Swal.fire('Check yor username and password');
+      }
+      else {
+        Swal.fire(error)
+      }
+    })
   }
 
 }
