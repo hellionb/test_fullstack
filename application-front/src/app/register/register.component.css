@@ -53,3 +53,15 @@ body {
     width: 50%;
     padding: 10px;
 }
+
+.warning{
+    color: red;
+    font-weight: bolder;
+}
+
+.message-block .error-message {
+    display: none;
+}
+.message-block .error-message:first-child {
+    display: block;
+}

@@ -12,6 +12,10 @@ import { User } from '../model/user.model';
 export class ApplicationService {
 
   private baseUrl = 'http://localhost:8080/application';
+
+  public placeholder = 'https://jsonplaceholder.typicode.com';
+
+ 
   private httpOptions = {
     headers: new HttpHeaders({
       Accept: 'application/json',
@@ -38,6 +42,11 @@ export class ApplicationService {
    * TODO Implémenter les requêtes pour la sauvegarde et le chargement des projets
    * -> Il faut s'inspirer des fonctions ci-dessus
    */
+
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.placeholder}/users`);
+  }
+
   saveProject() { }
   getProjects() { }
 

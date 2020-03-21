@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ApplicationService} from '../service/application.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApplicationService } from '../service/application.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { User } from '../model/user.model';
+import { delay } from "rxjs/operators";
 
 @Component({
   selector: 'app-register',
@@ -15,11 +17,15 @@ export class RegisterComponent implements OnInit {
   email: FormControl;
   username: FormControl;
   password: FormControl;
+  formValid = false;
+  public users = [];
+  usernameTaken = false;
+  emailTaken = false;
 
   constructor(private applicationService: ApplicationService, private router: Router) {
-    this.email = new FormControl('');
-    this.username = new FormControl('');
-    this.password = new FormControl('');
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.username = new FormControl('', [Validators.required]);
+    this.password = new FormControl('', [Validators.required]);
 
     this.formGroup = new FormGroup({
       email: this.email,
@@ -29,6 +35,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.applicationService.getUsers().subscribe(response => {
+      this.users = response;
+
+    })
   }
 
   onSubmit() {
@@ -36,11 +46,35 @@ export class RegisterComponent implements OnInit {
     // Losqu'un utilisateur existe déjà, cette requête ne devrait pas fonctionner,
     // Il faut donc afficher le bon message d'erreur avec une alerte via `Swal`
     // Il faut avoir un formulaire valide: mail valide et pas de champs vides
-    this.applicationService.register(this.username.value, this.password.value, this.email.value).subscribe((user) => {
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['home']);
-      Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
-    });
+    const myUsers = this.users
+
+    myUsers.forEach((user) => {
+      if (this.username.value === user.name) {
+        Swal.fire('Username is taken');
+        console.log('Username is taken')
+      }
+      if (this.email.value === user.email) {
+        Swal.fire('Email is taken');
+        console.log("email is taken")
+      }
+      else {
+          this.applicationService.register(this.username.value, this.password.value, this.email.value).subscribe((user) => {
+          sessionStorage.setItem('user', JSON.stringify(user));
+          this.router.navigate(['home']);
+          Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
+        });   
+      }
+    })
   }
 
 }
+
+
+var delayInMilliseconds = 1000; //1 second
+
+setTimeout(function() {
+  //your code to be executed after 1 second
+}, delayInMilliseconds);
+
+
+
