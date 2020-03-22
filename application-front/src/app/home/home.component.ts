@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   name: FormControl;
   amount: FormControl;
   description: FormControl;
+  showTable: boolean = false;
 
   constructor(private router: Router, private applicationService: ApplicationService) {
     this.name = new FormControl('');
@@ -31,11 +32,23 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     this.getUser();
     this.getUserProjects();
+    this.checkProjects();
+
   }
+
+  checkProjects() {
+    if (this.projects.length === 0) {
+      return this.showTable = false
+    }
+    else {
+      return this.showTable = true
+    }
+  }
+
+
 
   getUser() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
@@ -55,25 +68,26 @@ export class HomeComponent implements OnInit {
   }
 
 
-    // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
-    // -> Appeler le backend pour créer le projet avec les bonnes informations
-    // -> Ne pas oublier d'ajouter l'username de l'utilisateur
-    // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
+  // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
+  // -> Appeler le backend pour créer le projet avec les bonnes informations
+  // -> Ne pas oublier d'ajouter l'username de l'utilisateur
+  // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
   onSubmit() {
     let name = this.name.value;
     let amount = this.amount.value;
     let description = this.description.value;
     let user = this.user.username
     this.applicationService.saveProject(name, amount, description, user).subscribe(project => this.projects.push(project)
-      )}
-
-    logout() {
-      sessionStorage.clear();
-      this.router.navigate(['/login']);
-      Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
-    }
-  
+    )
   }
-  
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+    Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
+  }
+
+}
+
 
 
