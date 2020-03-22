@@ -42,15 +42,13 @@ export class RegisterComponent implements OnInit {
     // Losqu'un utilisateur existe déjà, cette requête ne devrait pas fonctionner,
     // Il faut donc afficher le bon message d'erreur avec une alerte via `Swal`
     // Il faut avoir un formulaire valide: mail valide et pas de champs vides
-    // const myUsers = this.users
     this.applicationService.areValuesAvaiable(this.username.value,this.email.value)
     this.applicationService.register(this.username.value, this.password.value, this.email.value).subscribe((user) => {
       sessionStorage.setItem('user', JSON.stringify(user));
       this.router.navigate(['home']);
       Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
     });
-  }
-  
+  } 
 }
   
 

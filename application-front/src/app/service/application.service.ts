@@ -61,9 +61,6 @@ export class ApplicationService {
     return this.http.get(`${this.placeholder}/users`);
   }
 
-
-
-
   private handleError(error: Response) {
     console.error(error)
     if (error instanceof HttpErrorResponse) {
@@ -79,7 +76,6 @@ export class ApplicationService {
   areValuesAvaiable(username: string, email: string) {
     this.getUsers().subscribe(results => {
       let users = results
-      console.log(results, 'from service this are users', username, 'username from service')
       if (users.forEach(x => x.username === username)) {
         console.log('username is taken')
         return false

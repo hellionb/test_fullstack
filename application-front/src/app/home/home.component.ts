@@ -62,11 +62,10 @@ export class HomeComponent implements OnInit {
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
     this.projects = [];
-    this.applicationService.getProjects().subscribe((data: any[]) => {
-      this.projects = data;
+    this.applicationService.getProjects().subscribe((results: any[]) => {
+      this.projects = results;
     })
   }
-
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
   // -> Appeler le backend pour créer le projet avec les bonnes informations

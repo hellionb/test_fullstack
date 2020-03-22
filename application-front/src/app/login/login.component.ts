@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
     // Losque les informations ne sont pas bonnes et que le backend renvoie une erreur,
     // Il faut afficher le bon message d'erreur avec une alerte via `Swal`
     this.applicationService.login(this.username.value, this.password.value).subscribe(
-      (user) => {
+      user => {
         sessionStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['/home']);
         Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
       },
-      (error) => {
-        if (error! instanceof HttpErrorResponse) {
+      error => {
+        if (error !instanceof HttpErrorResponse) {
           Swal.fire('Check yor username and password');
         }
         else {
