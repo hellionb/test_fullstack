@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
 
   private user: User;
   private projects: Project[];
-
   formGroup: FormGroup;
   name: FormControl;
   amount: FormControl;
@@ -25,13 +24,13 @@ export class HomeComponent implements OnInit {
     this.name = new FormControl('');
     this.amount = new FormControl('');
     this.description = new FormControl('');
-
     this.formGroup = new FormGroup({
       name: this.name,
       amount: this.amount,
       description: this.description
     });
   }
+
 
   ngOnInit() {
     this.getUser();
@@ -50,23 +49,31 @@ export class HomeComponent implements OnInit {
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
     this.projects = [];
-    this.applicationService.getProjects();
+    this.applicationService.getProjects().subscribe((data: any[]) => {
+      this.projects = data;
+    })
   }
 
-  // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
-  // -> Appeler le backend pour créer le projet avec les bonnes informations
-  // -> Ne pas oublier d'ajouter l'username de l'utilisateur
-  // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
+
+    // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
+    // -> Appeler le backend pour créer le projet avec les bonnes informations
+    // -> Ne pas oublier d'ajouter l'username de l'utilisateur
+    // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
   onSubmit() {
-    console.log(this.name.value);
-    console.log(this.amount.value);
-    console.log(this.description.value);
-    this.applicationService.saveProject();
-  }
+    let name = this.name.value;
+    let amount = this.amount.value;
+    let description = this.description.value;
+    let user = this.user.username
+    this.applicationService.saveProject(name, amount, description, user).subscribe(project => this.projects.push(project)
+      )}
 
-  logout() {
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
-    Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
+    logout() {
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+      Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
+    }
+  
   }
-}
+  
+
+
