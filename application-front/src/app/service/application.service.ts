@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
 import { Project } from '../model/project.model';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 
 
@@ -12,6 +13,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApplicationService {
+
 
   private baseUrl = 'http://localhost:8080/application';
 
@@ -25,12 +27,13 @@ export class ApplicationService {
     })
   };
 
+
   constructor(private http: HttpClient) {
   }
 
   login(username: string, password: string): Observable<User> {
     const url = this.baseUrl + '/login';
-    return this.http.post<User>(url, { username, password }, this.httpOptions)
+    return this.http.post<User>(url, { username, password }, this.httpOptions).pipe(catchError(this.handleError))
   }
 
   register(username: string, password: string, email: string): Observable<User> {
@@ -51,13 +54,14 @@ export class ApplicationService {
   }
 
   getProjects(): Observable<any> {
-    const url = this.baseUrl + '/save';
-    return this.http.put<any>(url, {}, this.httpOptions).pipe(catchError(this.handleError))
+    return this.http.get(`${this.baseUrl}/projects`);
   }
 
   getUsers(): Observable<any> {
     return this.http.get(`${this.placeholder}/users`);
   }
+
+
 
 
   private handleError(error: Response) {
@@ -71,7 +75,28 @@ export class ApplicationService {
       return Observable.throw(errorMsg)
     }
   }
+
+  areValuesAvaiable(username: string, email: string) {
+    this.getUsers().subscribe(results => {
+      let users = results
+      console.log(results, 'from service this are users', username, 'username from service')
+      if (users.forEach(x => x.username === username)) {
+        console.log('username is taken')
+        return false
+      }
+      if (users.forEach(x => x.email === email)) {
+        console.log('email is taken')
+        return false
+      }
+      else {
+        return true
+      }
+    }
+    )
+  }
 }
+
+
 
 
 
