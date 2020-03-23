@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit {
       },
       error => {
         if (error !instanceof HttpErrorResponse) {
-          Swal.fire('Check yor username and password');
+          Swal.fire("Veuillez vérifier votre nom d'utilisateur et votre mot de passe");
         }
         else {
-          Swal.fire('there has been error')
+          Swal.fire(error.message)
         }
       })
   }

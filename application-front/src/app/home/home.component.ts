@@ -37,15 +37,6 @@ export class HomeComponent implements OnInit {
     this.getUserProjects();
   }
 
-  checkProjects() {
-    if (this.projects.length === 0) {
-      return this.showTable = false
-    }
-    else {
-      return this.showTable = true
-    }
-  }
-
   getUser() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     if (this.user === null) {
@@ -57,7 +48,9 @@ export class HomeComponent implements OnInit {
   // Cette fonction ne fait rien pour l'instant
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
-    this.applicationService.getProjects(this.user.username).subscribe((results => this.projects = results))
+    this.applicationService.getProjects(this.user.username).subscribe((results => {
+       this.projects=results;
+    }))
   }
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire

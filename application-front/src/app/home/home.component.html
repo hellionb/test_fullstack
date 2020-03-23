@@ -1,19 +1,22 @@
 <div class="center">
   <button class="btn btn-secondary float-right" (click)="logout()">Sign out</button>
-  
+
   <div class="container project-form">
     <form autocomplete="off" class="form-signin" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <h3 class="h3 mb-3 font-weight-normal">Nouveau projet</h3>
       <label class="sr-only">Nom du projet</label>
       <input [formControl]="name" type="text" class="form-control" placeholder="Nom du projet" required>
       <label class="sr-only">Montant</label>
-      <input [formControl]="amount" type="number" class="form-control" placeholder="Montant du projet, ex: 999" required>
+      <input [formControl]="amount" type="number" class="form-control" placeholder="Montant du projet, ex: 999"
+        required>
       <label class="sr-only">Description</label>
-      <textarea [formControl]="description" rows="3" class="form-control" placeholder="Description du projet" required></textarea>
-      <button class="btn btn-lg btn-primary custom-btn btn-block" type="submit" [disabled]="formGroup.invalid">Créer</button>
+      <textarea [formControl]="description" rows="3" class="form-control" placeholder="Description du projet"
+        required></textarea>
+      <button class="btn btn-lg btn-primary custom-btn btn-block" type="submit"
+        [disabled]="formGroup.invalid">Créer</button>
     </form>
   </div>
-  
+
   <div>
     <h3>Projets</h3>
     <!-- Tableau contenant les projets -->
@@ -21,30 +24,31 @@
     <!-- TODO 2: Masquer ce tableau et afficher un message indiquant l'absence de projets -->
 
     <!-- if there is no projects display this message -->
-<div *ngIf="!showTable">This user has no projects for the moment</div>
-    <div>
-    <table class="project-table">
-      <thead>
-        <tr>
-          <!-- project.name -->
-          <th>Nom</th>
-          <!-- project.amount -->
-          <th>Montant</th>
-          <!-- project.description -->
-          <th>Description</th>
-          <!-- project.ownerUsername -->
-          <th>Propriétaire</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let project of projects">
-        <tr>
-          <td>{{project.name}}</td>
-          <td>{{project.amount}}</td>
-          <td>{{project.description}}</td>
-          <td>{{project.ownerUsername}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <div>
+    <div *ngIf="projects.length === 0">
+      L'utilisateur n'a aucun projet pour le moment
+    </div>
+    <div *ngIf="projects.length !== 0">
+      <table class="project-table">
+        <thead>
+          <tr>
+            <!-- project.name -->
+            <th>Nom</th>
+            <!-- project.amount -->
+            <th>Montant</th>
+            <!-- project.description -->
+            <th>Description</th>
+            <!-- project.ownerUsername -->
+            <th>Propriétaire</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let project of projects">
+          <tr>
+            <td>{{project.name}}</td>
+            <td>{{project.amount}}</td>
+            <td>{{project.description}}</td>
+            <td>{{project.ownerUsername}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>

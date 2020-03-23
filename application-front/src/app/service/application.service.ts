@@ -5,6 +5,7 @@ import { User } from '../model/user.model';
 import { Project } from '../model/project.model';
 import { catchError, map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { error } from 'protractor';
 
 
 
@@ -58,12 +59,11 @@ export class ApplicationService {
   private handleError(error: Response) {
     console.error(error)
     if (error instanceof HttpErrorResponse) {
-      let errorMsg = `error code ${error.status} on the ${error.url}`;
+      let errorMsg = `error code ${error.status} on the ${error.statusText}`;
       return Observable.throw(errorMsg)
     }
     else {
-      let errorMsg = 'Check your username and password'
-      return errorMsg
+      return error.statusText
     }
   }
 

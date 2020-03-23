@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { User } from '../model/user.model';
 import { delay } from "rxjs/operators";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -47,12 +48,14 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['home']);
       Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
     },
-    error=>{
-      Swal.fire(`Please check your username or password! error has occured ${error.message}` )
-    });
-  } 
+      error => {
+        if (error) {
+          Swal.fire(error.message);
+        }
+      })
+  }
 }
-  
+
 
 
 
