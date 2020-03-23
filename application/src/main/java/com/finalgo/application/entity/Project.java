@@ -18,6 +18,7 @@ public class Project implements Serializable {
     private Integer amount;
     @Column(length = 8191)
     private String description;
+    @Column(name = "ownerUsername")
     private String ownerUsername;
 
     public Integer getId() {

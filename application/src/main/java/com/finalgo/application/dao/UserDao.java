@@ -15,11 +15,20 @@ public class UserDao extends AbstractGenericDao<User> {
      * @param username
      * @param password
      * @return User
-     *
-     * TODO Implémenter la requête Hibernate/SQL
      */
     public User findWithCredentials(String username, String password) {
-        String query = "";
+        String query = "FROM User WHERE username = '" + username + "' AND password = '" + password + "'";
+        return createOneItemSelectQuery(query);
+    }
+
+    public User findByUsername(String username) {
+        String query = "FROM User WHERE username = '" + username + "'";
+        return createOneItemSelectQuery(query);
+    }
+
+    public User findByEmail(String email) {
+        String query = "FROM User WHERE email = '" + email + "'";
         return createOneItemSelectQuery(query);
     }
 }
+
