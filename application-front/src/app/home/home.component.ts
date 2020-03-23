@@ -35,8 +35,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getUser();
     this.getUserProjects();
-    this.checkProjects();
-
   }
 
   checkProjects() {
@@ -47,8 +45,6 @@ export class HomeComponent implements OnInit {
       return this.showTable = true
     }
   }
-
-
 
   getUser() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
@@ -61,10 +57,7 @@ export class HomeComponent implements OnInit {
   // Cette fonction ne fait rien pour l'instant
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
-    this.projects = [];
-    this.applicationService.getProjects().subscribe((results: any[]) => {
-      this.projects = results;
-    })
+    this.applicationService.getProjects(this.user.username).subscribe((results => this.projects = results))
   }
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
@@ -72,11 +65,11 @@ export class HomeComponent implements OnInit {
   // -> Ne pas oublier d'ajouter l'username de l'utilisateur
   // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
   onSubmit() {
+    let ownerUsername = this.user.username;
     let name = this.name.value;
     let amount = this.amount.value;
-    let description = this.description.value;
-    let user = this.user.username
-    this.applicationService.saveProject(name, amount, description, user).subscribe(project => this.projects.push(project)
+    let description = this.description.value;    
+    this.applicationService.saveProject( ownerUsername, name, amount, description ).subscribe(project => {this.projects.push(project)}
     )
   }
 

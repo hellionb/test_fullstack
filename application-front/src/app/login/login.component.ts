@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   username: FormControl;
   password: FormControl;
-  errorMsg;
 
   constructor(private applicationService: ApplicationService, private router: Router) {
     this.username = new FormControl('', Validators.required);
@@ -46,7 +45,7 @@ export class LoginComponent implements OnInit {
           Swal.fire('Check yor username and password');
         }
         else {
-          Swal.fire('there has been error on the server', error)
+          Swal.fire('there has been error')
         }
       })
   }

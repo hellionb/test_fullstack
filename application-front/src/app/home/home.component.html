@@ -22,7 +22,7 @@
 
     <!-- if there is no projects display this message -->
 <div *ngIf="!showTable">This user has no projects for the moment</div>
-    <div *ngIf="showTable">
+    <div>
     <table class="project-table">
       <thead>
         <tr>
@@ -36,7 +36,7 @@
           <th>Propriétaire</th>
         </tr>
       </thead>
-      <tbody *ngFor="let project of PROJECTMOCK">
+      <tbody *ngFor="let project of projects">
         <tr>
           <td>{{project.name}}</td>
           <td>{{project.amount}}</td>
