@@ -31,6 +31,8 @@
       <table class="project-table">
         <thead>
           <tr>
+            <!-- project.id -->
+            <th>Id</th>
             <!-- project.name -->
             <th>Nom</th>
             <!-- project.amount -->
@@ -39,14 +41,18 @@
             <th>Description</th>
             <!-- project.ownerUsername -->
             <th>Propriétaire</th>
+            <!-- project delete -->
+            <th>Supprimér</th>
           </tr>
         </thead>
         <tbody *ngFor="let project of projects">
           <tr>
+            <td>{{project.id}}</td>
             <td>{{project.name}}</td>
             <td>{{project.amount}}</td>
             <td>{{project.description}}</td>
             <td>{{project.ownerUsername}}</td>
+            <td><button class="delete"(click)="delete(project.id)">x</button></td>
           </tr>
         </tbody>
       </table>

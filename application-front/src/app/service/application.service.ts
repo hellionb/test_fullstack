@@ -56,6 +56,12 @@ export class ApplicationService {
     return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions);
   }
 
+  deleteProject(id:number){
+    console.log('from service', id)
+    return this.http.delete<Project>(`${this.baseUrl}/getProject/${id}`, this.httpOptions);
+    
+  }
+
   private handleError(error: Response) {
     console.error(error)
     if (error instanceof HttpErrorResponse) {

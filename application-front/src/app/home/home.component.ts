@@ -72,6 +72,10 @@ export class HomeComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
+  delete(id){
+    this.applicationService.deleteProject(id).subscribe(project=>project.id=id)
+  }
+
 }
 
 

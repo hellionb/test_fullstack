@@ -53,3 +53,12 @@
     font-style: normal;
     padding: 10px 10px !important;
 }
+
+.delete{
+    border-radius: 50%;
+    background-color: crimson;
+    border-style: none;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
