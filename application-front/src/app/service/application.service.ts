@@ -57,21 +57,20 @@ export class ApplicationService {
   }
 
   deleteProject(id:number){
-    console.log('from service', id)
-    return this.http.delete<Project>(`${this.baseUrl}/getProject/${id}`, this.httpOptions);
+    return this.http.delete<Project>(`${this.baseUrl}/deleteProject?id=${id}`, this.httpOptions);
     
   }
 
-  private handleError(error: Response) {
-    console.error(error)
-    if (error instanceof HttpErrorResponse) {
-      let errorMsg = `error code ${error.status} on the ${error.statusText}`;
-      return Observable.throw(errorMsg)
-    }
-    else {
-      return error.statusText
-    }
-  }
+  // private handleError(error: Response) {
+  //   console.error(error)
+  //   if (error instanceof HttpErrorResponse) {
+  //     let errorMsg = `error code ${error.status} on the ${error.statusText}`;
+  //     return Observable.throw(errorMsg)
+  //   }
+  //   else {
+  //     return error.statusText
+  //   }
+  // }
 
   
 }

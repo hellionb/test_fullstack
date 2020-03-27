@@ -14,4 +14,16 @@ public class ProjectDao extends AbstractGenericDao<Project> {
         String query = "FROM Project WHERE ownerUsername = '" + ownerUsername + "'";
         return createSelectQuery(query);
     }
+
+    public Project getProject(Long id){
+        String query = "FROM Project WHERE id ="+id;
+        return createOneItemSelectQuery(query);
+
+    }
+
+    public void deleteProject(long id){
+        deleteById(id);
+
+    }
+
 }

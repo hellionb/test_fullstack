@@ -10,12 +10,7 @@ import com.finalgo.application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -89,4 +84,20 @@ public class ApplicationRouting {
         List<Project> projects = projectDao.findProjectsByOwnerUsername(ownerUsername);
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/getProject", method = RequestMethod.GET)
+    public ResponseEntity <Project> getProject(@RequestParam Long id) {
+        Project project = projectDao.getProject(id);
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/deleteProject", method = RequestMethod.DELETE)
+    public void deleteProject(@RequestParam long id) {
+        projectDao.deleteProject(id);
+
+    }
+
 }
+
+
+

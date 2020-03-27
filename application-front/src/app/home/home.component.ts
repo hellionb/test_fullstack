@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
     this.applicationService.getProjects(this.user.username).subscribe((results => {
-       this.projects=results;
+      this.projects=results;
     }))
   }
 
@@ -73,10 +73,14 @@ export class HomeComponent implements OnInit {
   }
 
   delete(id){
-    this.applicationService.deleteProject(id).subscribe(project=>project.id=id)
+    this.applicationService.deleteProject(id).subscribe()
+    let updatedProjects=this.projects.filter((project)=>project.id !== id)
+    this.projects=updatedProjects
+    
   }
 
 }
+
 
 
 
