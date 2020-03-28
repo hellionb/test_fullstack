@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angul
 import { Observable } from 'rxjs';
 import { User } from '../model/user.model';
 import { Project } from '../model/project.model';
-import { catchError, map } from 'rxjs/operators';
-import Swal from 'sweetalert2';
-import { error } from 'protractor';
+
 
 
 

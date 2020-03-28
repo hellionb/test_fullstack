@@ -22,12 +22,11 @@
     <!-- Tableau contenant les projets -->
     <!-- TODO 1: Lier le tableau ci-dessous avec `this.projects` pour afficher un projet par ligne -->
     <!-- TODO 2: Masquer ce tableau et afficher un message indiquant l'absence de projets -->
-
     <!-- if there is no projects display this message -->
-    <div *ngIf="projects.length === 0">
+    <div *ngIf="projects.length === 0 || projects.length === null">
       L'utilisateur n'a aucun projet pour le moment
     </div>
-    <div *ngIf="projects.length !== 0">
+    <div *ngIf="projects.length !== 0 || projects.length === null">
       <table class="project-table">
         <thead>
           <tr>

@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
     this.applicationService.login(this.username.value, this.password.value).subscribe(
       user => {
         sessionStorage.setItem('user', JSON.stringify(user));
-        this.router.navigate(['/home']);
+        if(user.username==="admin"){
+          this.router.navigate(['adminPage']);
+          }else{
+        this.router.navigate(['/home'])}
         Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
       },
       error => {

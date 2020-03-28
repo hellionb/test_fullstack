@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
     this.applicationService.getProjects(this.user.username).subscribe((results => {
-      this.projects=results;
+      this.projects = results;
     }))
   }
 
@@ -61,8 +61,8 @@ export class HomeComponent implements OnInit {
     let ownerUsername = this.user.username;
     let name = this.name.value;
     let amount = this.amount.value;
-    let description = this.description.value;    
-    this.applicationService.saveProject( ownerUsername, name, amount, description ).subscribe(project => {this.projects.push(project)}
+    let description = this.description.value;
+    this.applicationService.saveProject(ownerUsername, name, amount, description).subscribe(project => { this.projects.push(project) }
     )
   }
 
@@ -72,11 +72,35 @@ export class HomeComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
-  delete(id){
-    this.applicationService.deleteProject(id).subscribe()
-    let updatedProjects=this.projects.filter((project)=>project.id !== id)
-    this.projects=updatedProjects
-    
+
+  delete(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.applicationService.deleteProject(id).subscribe()
+        let updatedProjects = this.projects.filter((project) => project.id !== id);
+        this.projects = updatedProjects
+        Swal.fire(
+          'Deleted!',
+          'Your project has been deleted.',
+          'success'
+        )
+      }
+    })
+
+
+
+
+
+
+
   }
 
 }
