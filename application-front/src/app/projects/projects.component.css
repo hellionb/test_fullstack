@@ -28,15 +28,10 @@
     padding: 10px;
 }
 
-h3{
-    margin-top: 50px;
-    text-align: center;
-}
 
 .project-table {
-    margin-top: 180px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    margin-top: 300px;
     border-spacing: 0px;
     width: 80%;
     background-color: #d6d6d6;
@@ -62,27 +57,4 @@ h3{
     padding: 10px 10px !important;
 }
 
-.delete{
-    border-radius: 50%;
-    background-color: crimson;
-    border-style: none;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-}
 
-
-.buttons{
-
-    align-items: flex-end !important;
-}
-
-.actionBtn{
-    margin-top: 20px;
-    margin-right: 160px;
-}
-
-td:hover{
-    color:rgb(155, 127, 1);
-    text-decoration: underline;
-}

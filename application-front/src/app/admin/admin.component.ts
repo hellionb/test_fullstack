@@ -31,8 +31,13 @@ export class AdminComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
-  openProjectList(id){
-    console.log('this is selected id ', id)
+  openProjectList(ownerUsername){
+    console.log('this is selected id ', ownerUsername)
+    this.applicationService.userToLoad =ownerUsername;
+    this.router.navigate(['/projects'])
+
   }
+
+  
 
 }

@@ -19,8 +19,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
-                <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
+                <td (click)="openProjectList(user.username)">{{user.username}}</td>
+                <td (click)="openProjectList(user.username)">{{user.email}}</td>
                 <td>Projects:</td>
                 <td><button class="delete">x</button></td>
             </tr>

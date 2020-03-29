@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AdminComponent } from './admin/admin.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ export class ApplicationService {
 
 
   private baseUrl = 'http://localhost:8080/application';
+  userToLoad: String;
 
 
   private httpOptions = {
@@ -23,6 +24,7 @@ export class ApplicationService {
       'Content-Type': 'application/json',
     })
   };
+ 
 
 
   constructor(private http: HttpClient) {
@@ -62,6 +64,13 @@ export class ApplicationService {
     return this.http.delete<Project>(`${this.baseUrl}/deleteProject?id=${id}`, this.httpOptions);
     
   }
+  
+
+  getUsersProjects(ownerUsername): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions)
+    
+  }
+
 
   // private handleError(error: Response) {
   //   console.error(error)
