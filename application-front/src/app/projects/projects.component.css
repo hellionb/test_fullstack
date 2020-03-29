@@ -31,7 +31,7 @@
 
 .project-table {
     margin: auto;
-    margin-top: 300px;
+    margin-top: 200px;
     border-spacing: 0px;
     width: 80%;
     background-color: #d6d6d6;
@@ -55,6 +55,10 @@
     font-weight: 400;
     font-style: normal;
     padding: 10px 10px !important;
+}
+
+h3{
+    margin-top: 100px;
 }
 
 

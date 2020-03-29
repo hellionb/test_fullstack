@@ -82,7 +82,8 @@ h3{
     margin-right: 160px;
 }
 
-td:hover{
+.linkToProjects:hover{
     color:rgb(155, 127, 1);
     text-decoration: underline;
+    cursor: pointer;
 }
