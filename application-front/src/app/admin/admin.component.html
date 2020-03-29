@@ -18,10 +18,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Ana</td>
-                <td>ata@fsfs</td>
-                <td>45</td>
+            <tr *ngFor="let user of users">
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>Projects:</td>
                 <td><button class="delete">x</button></td>
             </tr>
         </tbody>

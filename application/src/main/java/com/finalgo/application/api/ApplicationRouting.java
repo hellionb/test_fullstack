@@ -97,6 +97,11 @@ public class ApplicationRouting {
 
     }
 
+    @RequestMapping(value="/getUsers", method = RequestMethod.GET)
+    public List<User> allUsers() {
+        return userDao.findAll();
+    }
+
 }
 
 

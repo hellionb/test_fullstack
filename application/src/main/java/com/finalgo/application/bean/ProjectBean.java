@@ -1,5 +1,8 @@
 package com.finalgo.application.bean;
 
+import com.finalgo.application.entity.User;
+import org.springframework.data.jpa.repository.Query;
+
 /**
  * Objet permettant le transfert des données de Login du front vers le back
  */
@@ -53,4 +56,8 @@ public class ProjectBean {
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
     }
+
+
+
+
 }

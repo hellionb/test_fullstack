@@ -2,13 +2,11 @@ package com.finalgo.application.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
@@ -72,4 +70,6 @@ public abstract class AbstractGenericDao<T extends Serializable> {
     protected Session getCurrentSession() {
         return entityManager.unwrap(Session.class);
     }
+
+
 }

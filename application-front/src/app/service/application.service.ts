@@ -54,6 +54,10 @@ export class ApplicationService {
     return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions);
   }
 
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/getUsers`, this.httpOptions);
+  }
+
   deleteProject(id:number){
     return this.http.delete<Project>(`${this.baseUrl}/deleteProject?id=${id}`, this.httpOptions);
     
