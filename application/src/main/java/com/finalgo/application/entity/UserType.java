@@ -1,6 +1,6 @@
 package com.finalgo.application.entity;
 
-public enum userType {
+public enum UserType {
     STANDARD,
     ADMIN
 }

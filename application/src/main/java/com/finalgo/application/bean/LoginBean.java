@@ -1,12 +1,14 @@
 package com.finalgo.application.bean;
 
+import org.hibernate.usertype.UserType;
+
 /**
  * Objet permettant le transfert des données de Login du front vers le back
  */
 public class LoginBean {
     private String username;
     private String password;
-    private String type;
+    private UserType type;
 
     public LoginBean() {
     }
@@ -27,11 +29,7 @@ public class LoginBean {
         this.password = password;
     }
 
-    public String getType() {
-        return type;
-    }
+    public UserType getType() { return type;}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    public void setType(UserType type) { this.type = type;}
 }

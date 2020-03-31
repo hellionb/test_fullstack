@@ -2,10 +2,7 @@ package com.finalgo.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -16,7 +13,8 @@ public class User implements Serializable {
     private Integer id;
 
     private String username;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private UserType type;
     @JsonIgnore
     private String password;
     private String email;
@@ -57,7 +55,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public  String getType(String type){return type;}
+    public UserType getType() {
+        return type;
+    }
 
-    public  void setType (String type){this.type = type;}
+    public void setType(UserType type) {
+        this.type = type;
+    }
 }
+

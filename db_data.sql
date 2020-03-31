@@ -56,11 +56,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO user (id, email, password, username, type ) VALUES
- (1, 'ana@ana', 'ana', 'Ana', 'admin'),
- (2, 'david@david', 'david', 'David', 'standard'),
- (3, 'jade@jade', 'jade', 'Jade', 'standard'),
- (4, 'paul@paul', 'paul', 'Paul', 'standard'),
- (5, 'bertrand@bertrand', 'bertrand', 'Bertrand', 'standard');
+ (1, 'ana@ana', 'ana', 'Ana', 'ADMIN'),
+ (2, 'david@david', 'david', 'David', 'STANDARD'),
+ (3, 'jade@jade', 'jade', 'Jade', 'STANDARD'),
+ (4, 'paul@paul', 'paul', 'Paul', 'STANDARD'),
+ (5, 'bertrand@bertrand', 'bertrand', 'Bertrand', 'STANDARD');
 
 
 
