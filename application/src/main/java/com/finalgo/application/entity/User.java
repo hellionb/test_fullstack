@@ -16,9 +16,11 @@ public class User implements Serializable {
     private Integer id;
 
     private String username;
+    private String type;
     @JsonIgnore
     private String password;
     private String email;
+
 
     public User() {
     }
@@ -54,4 +56,8 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public  String getType(String type){return type;}
+
+    public  void setType (String type){this.type = type;}
 }

@@ -37,14 +37,16 @@ export class LoginComponent implements OnInit {
     this.applicationService.login(this.username.value, this.password.value).subscribe(
       user => {
         sessionStorage.setItem('user', JSON.stringify(user));
-        if(user.username==="admin"){
+        if (user.username === "admin") {
           this.router.navigate(['adminPage']);
-          }else{
-        this.router.navigate(['/home'])}
+        } else {
+          console.log('user type is', user.type)
+          this.router.navigate(['/home'])
+        }
         Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
       },
       error => {
-        if (error !instanceof HttpErrorResponse) {
+        if (error! instanceof HttpErrorResponse) {
           Swal.fire("Veuillez vérifier votre nom d'utilisateur et votre mot de passe");
         }
         else {

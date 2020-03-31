@@ -8,6 +8,7 @@ public class RegisterBean {
     private String password;
     private String email;
 
+
     public RegisterBean() {
     }
 
@@ -34,4 +35,6 @@ public class RegisterBean {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
