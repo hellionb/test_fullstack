@@ -6,8 +6,6 @@ import { Project } from '../model/project.model';
 
 
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,15 +22,13 @@ export class ApplicationService {
       'Content-Type': 'application/json',
     })
   };
- 
-
 
   constructor(private http: HttpClient) {
   }
 
   login(username: string, password: string): Observable<User> {
     const url = this.baseUrl + '/login';
-    return this.http.post<User>(url, { username, password }, this.httpOptions)
+    return this.http.post<User>(url, { username, password }, this.httpOptions);
   }
 
   register(username: string, password: string, email: string): Observable<User> {
@@ -52,7 +48,7 @@ export class ApplicationService {
     return this.http.post<Project>(url, { ownerUsername, name, amount, description }, this.httpOptions);
   }
 
-  getProjects(ownerUsername:string): Observable<Project[]> {
+  getProjects(ownerUsername: string): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions);
   }
 
@@ -60,30 +56,17 @@ export class ApplicationService {
     return this.http.get<User[]>(`${this.baseUrl}/getUsers`, this.httpOptions);
   }
 
-  deleteProject(id:number){
+  deleteProject(id: number) {
     return this.http.delete<Project>(`${this.baseUrl}/deleteProject?id=${id}`, this.httpOptions);
-    
-  }
-  
-
-  getUsersProjects(ownerUsername): Observable<Project[]>{
-    return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions)
-    
   }
 
+  deleteUser(id: number){
+    return this.http.delete<User>(`${this.baseUrl}/deleteUser?id=${id}`, this.httpOptions);
+  }
 
-  // private handleError(error: Response) {
-  //   console.error(error)
-  //   if (error instanceof HttpErrorResponse) {
-  //     let errorMsg = `error code ${error.status} on the ${error.statusText}`;
-  //     return Observable.throw(errorMsg)
-  //   }
-  //   else {
-  //     return error.statusText
-  //   }
-  // }
-
-  
+  getUsersProjects(ownerUsername: string): Observable<Project[]>{
+    return this.http.get<Project[]>(`${this.baseUrl}/getProjects?ownerUsername=${ownerUsername}`, this.httpOptions);
+  }
 }
 
 

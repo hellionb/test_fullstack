@@ -11,18 +11,19 @@ import { User } from '../model/user.model';
 })
 export class AdminComponent implements OnInit {
 
-  users:User[];
+  users: User[];
+
 
   constructor(private router: Router, private applicationService: ApplicationService) { }
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
   }
 
   getUsers(){
     this.applicationService.getUsers().subscribe((results => {
-      this.users=results;
-    }))
+      this.users = results;
+    }));
   }
 
   logout() {
@@ -31,13 +32,31 @@ export class AdminComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
-  openProjectList(ownerUsername){
-    console.log('this is selected id ', ownerUsername)
-    this.applicationService.userToLoad =ownerUsername;
-    this.router.navigate(['/projects'])
-
+  openProjectList(ownerUsername) {
+    this.applicationService.userToLoad = ownerUsername;
+    this.router.navigate(['/projects']);
   }
 
-  
-
+  delete(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.applicationService.deleteUser(id).subscribe();
+        let updatedUsers = this.users.filter((user) => user.id !== id);
+        this.users = updatedUsers;
+        Swal.fire(
+          'Deleted!',
+          'User has been deleted.',
+          'success'
+        );
+      }
+    });
+  }
 }

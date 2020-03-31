@@ -17,13 +17,11 @@ export class ProjectsComponent implements OnInit {
   constructor(private router: Router, private applicationService: ApplicationService) { }
 
   ngOnInit() {
-    this.ownerUsername = this.applicationService.userToLoad; 
+    this.ownerUsername = this.applicationService.userToLoad;
     this.loadProjects(this.ownerUsername);
   }
 
   loadProjects(ownerUsername){
-    this.applicationService.getProjects(ownerUsername).subscribe(results=>this.projects=results)
+    this.applicationService.getProjects(ownerUsername).subscribe(results => this.projects = results);
   }
-
-
 }

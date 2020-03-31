@@ -1,31 +1,31 @@
 <div class="container text-center center">
-  <form autocomplete="off" class="form-signin" (ngSubmit)="onSubmit()">
-    <h1 class="h3 mb-3 font-weight-normal">Register new account</h1>
-    <label class="sr-only">Email address</label>
+    <form autocomplete="off" class="form-signin" (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 font-weight-normal">Register new account</h1>
+        <label class="sr-only">Email address</label>
 
-    <input [formControl]="email" type="text" class="form-control" placeholder="Email" required>
+        <input [formControl]="email" type="text" class="form-control" placeholder="Email" required>
 
 
-    <div class="message-block warning">
-      <span class="error-message" *ngIf="formGroup.get('email').hasError('required') && !formGroup.get('email').pristine">
+        <div class="message-block warning">
+            <span class="error-message" *ngIf="formGroup.get('email').hasError('required') && !formGroup.get('email').pristine">
         Email is required 
       </span>
-      <span class="error-message warning" *ngIf="formGroup.get('email').hasError('email')">
+            <span class="error-message warning" *ngIf="formGroup.get('email').hasError('email')">
         Invalid email format 
       </span>
-    </div>
+        </div>
 
-<label class="sr-only">Username</label>
-<input [formControl]="username" type="text" class="form-control" placeholder="Username" required>
-<div *ngIf="formGroup.get('username').errors && !formGroup.get('username').pristine">
-  <div [hidden]="!formGroup.get('username').invalid" class="warning">Name is mandatory</div>
-</div>
-<label class="sr-only">Password</label>
-<input [formControl]="password" type="password" class="form-control" placeholder="Password" required>
-<div *ngIf="formGroup.get('password').errors && !formGroup.get('password').pristine">
-  <div [hidden]="!formGroup.get('password').invalid" class="warning">Password is mandatory</div>
-</div>
-<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="formGroup.invalid">Register</button>
-<button class="btn btn-lg btn-secondary btn-block" type="button" routerLink="/login">Sign in</button>
-</form>
+        <label class="sr-only">Username</label>
+        <input [formControl]="username" type="text" class="form-control" placeholder="Username" required>
+        <div *ngIf="formGroup.get('username').errors && !formGroup.get('username').pristine">
+            <div [hidden]="!formGroup.get('username').invalid" class="warning">Name is mandatory</div>
+        </div>
+        <label class="sr-only">Password</label>
+        <input [formControl]="password" type="password" class="form-control" placeholder="Password" required>
+        <div *ngIf="formGroup.get('password').errors && !formGroup.get('password').pristine">
+            <div [hidden]="!formGroup.get('password').invalid" class="warning">Password is mandatory</div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="formGroup.invalid">Register</button>
+        <button class="btn btn-lg btn-secondary btn-block" type="button" routerLink="/login">Sign in</button>
+    </form>
 </div>
