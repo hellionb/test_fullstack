@@ -1,5 +1,5 @@
 <div class="buttons d-flex flex-column">
-    <button class="btn btn-secondary actionBtn" routerLink="/home">Create projects</button>
+    <button class="btn btn-secondary actionBtn" routerLink="/home">Home</button>
     <button class="btn btn-secondary actionBtn" (click)="logout()">Sign out</button>
 </div>
 
@@ -13,16 +13,14 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Number of projects created</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
-                <td class="linkToProjects"(click)="openProjectList(user.username)">{{user.username}}</td>
+                <td class="linkToProjects" (click)="openProjectList(user.username)">{{user.username}}</td>
                 <td>{{user.email}}</td>
-                <td>Projects:</td>
-                <td><button class="delete">x</button></td>
+                <td><button class="delete" (click)="delete(user.id)">x</button></td>
             </tr>
         </tbody>
     </table>

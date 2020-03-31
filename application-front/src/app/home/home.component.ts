@@ -5,6 +5,7 @@ import { ApplicationService } from '../service/application.service';
 import { Project } from '../model/project.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { UserType } from '../model/userType';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   amount: FormControl;
   description: FormControl;
   showTable = false;
+  showUserListBtn = false;
 
   constructor(private router: Router, private applicationService: ApplicationService) {
     this.name = new FormControl('');
@@ -39,6 +41,9 @@ export class HomeComponent implements OnInit {
 
   getUser() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
+    if (this.user.type === UserType.ADMIN){
+      this.showUserListBtn = true;
+    }
     if (this.user === null) {
       this.router.navigate(['login']);
     }
@@ -76,7 +81,7 @@ export class HomeComponent implements OnInit {
   delete(id) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
