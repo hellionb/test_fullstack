@@ -4,7 +4,6 @@ import { ApplicationService } from '../service/application.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { User } from '../model/user.model';
-import { delay } from "rxjs/operators";
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -52,7 +51,7 @@ export class RegisterComponent implements OnInit {
         if (error) {
           Swal.fire(error.message);
         }
-      })
+      });
   }
 }
 

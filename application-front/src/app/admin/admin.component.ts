@@ -16,13 +16,13 @@ export class AdminComponent implements OnInit {
   constructor(private router: Router, private applicationService: ApplicationService) { }
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
   }
 
   getUsers(){
     this.applicationService.getUsers().subscribe((results => {
-      this.users=results;
-    }))
+      this.users = results;
+    }));
   }
 
   logout() {
@@ -33,11 +33,9 @@ export class AdminComponent implements OnInit {
 
   openProjectList(ownerUsername){
     console.log('this is selected id ', ownerUsername)
-    this.applicationService.userToLoad =ownerUsername;
-    this.router.navigate(['/projects'])
+    this.applicationService.userToLoad = ownerUsername;
+    this.router.navigate(['/projects']);
 
   }
-
-  
 
 }

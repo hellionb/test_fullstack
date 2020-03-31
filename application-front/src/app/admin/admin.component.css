@@ -1,16 +1,19 @@
 .project-form {
     margin-bottom: 20px;
 }
+
 .btn-primary.custom-btn {
-	background-color: #271433;
-	border-color: #000;
+    background-color: #271433;
+    border-color: #000;
 }
+
 .form-signin {
     width: 100%;
     max-width: 500px;
     padding: 15px;
     margin: 0 auto;
 }
+
 .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -18,9 +21,11 @@
     padding: 10px;
     font-size: 16px;
 }
+
 .form-signin .form-control:focus {
     z-index: 2;
 }
+
 .center {
     text-align: center;
     margin: auto;
@@ -28,7 +33,7 @@
     padding: 10px;
 }
 
-h3{
+h3 {
     margin-top: 50px;
     text-align: center;
 }
@@ -44,6 +49,7 @@ h3{
     border: 1px solid transparent;
     overflow: hidden;
 }
+
 .project-table th {
     background-color: #271433;
     color: #ffffff;
@@ -53,6 +59,7 @@ h3{
     border-left: 1px solid #d6d6d6;
     padding: 20px 10px !important;
 }
+
 .project-table td {
     border-left: 1px solid #ffffff;
     border-top: 1px solid #ffffff;
@@ -62,7 +69,7 @@ h3{
     padding: 10px 10px !important;
 }
 
-.delete{
+.delete {
     border-radius: 50%;
     background-color: crimson;
     border-style: none;
@@ -71,19 +78,17 @@ h3{
     text-align: center;
 }
 
-
-.buttons{
-
+.buttons {
     align-items: flex-end !important;
 }
 
-.actionBtn{
+.actionBtn {
     margin-top: 20px;
     margin-right: 160px;
 }
 
-.linkToProjects:hover{
-    color:rgb(155, 127, 1);
+.linkToProjects:hover {
+    color: rgb(155, 127, 1);
     text-decoration: underline;
     cursor: pointer;
 }

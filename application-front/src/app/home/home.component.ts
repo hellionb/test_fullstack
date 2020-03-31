@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   name: FormControl;
   amount: FormControl;
   description: FormControl;
-  showTable: boolean = false;
+  showTable = false;
 
   constructor(private router: Router, private applicationService: ApplicationService) {
     this.name = new FormControl('');
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   getUserProjects() {
     this.applicationService.getProjects(this.user.username).subscribe((results => {
       this.projects = results;
-    }))
+    }));
   }
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
     let name = this.name.value;
     let amount = this.amount.value;
     let description = this.description.value;
-    this.applicationService.saveProject(ownerUsername, name, amount, description).subscribe(project => { this.projects.push(project) }
-    )
+    this.applicationService.saveProject(ownerUsername, name, amount, description).subscribe(project => { this.projects.push(project); }
+    );
   }
 
   logout() {
@@ -84,25 +84,17 @@ export class HomeComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        this.applicationService.deleteProject(id).subscribe()
+        this.applicationService.deleteProject(id).subscribe();
         let updatedProjects = this.projects.filter((project) => project.id !== id);
-        this.projects = updatedProjects
+        this.projects = updatedProjects;
         Swal.fire(
           'Deleted!',
           'Your project has been deleted.',
           'success'
-        )
+        );
       }
-    })
-
-
-
-
-
-
-
+    });
   }
-
 }
 
 
