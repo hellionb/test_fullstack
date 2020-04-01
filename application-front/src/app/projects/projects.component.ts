@@ -11,7 +11,7 @@ import { ApplicationService } from '../service/application.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  private ownerUsername: String;
+  private ownerUsername: string;
   private projects: Project[];
 
   constructor(private router: Router, private applicationService: ApplicationService) { }
@@ -21,7 +21,7 @@ export class ProjectsComponent implements OnInit {
     this.loadProjects(this.ownerUsername);
   }
 
-  loadProjects(ownerUsername){
+  loadProjects(ownerUsername: string) {
     this.applicationService.getProjects(ownerUsername).subscribe(results => this.projects = results);
   }
 }

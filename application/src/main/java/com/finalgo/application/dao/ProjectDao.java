@@ -15,15 +15,13 @@ public class ProjectDao extends AbstractGenericDao<Project> {
         return createSelectQuery(query);
     }
 
-    public Project getProject(Long id){
-        String query = "FROM Project WHERE id ="+id;
+    public Project getProject(Long id) {
+        String query = "FROM Project WHERE id = " + id;
         return createOneItemSelectQuery(query);
-
     }
 
-    public void deleteProject(long id){
+    public void deleteProject(long id) {
         deleteById(id);
-
     }
 
 }

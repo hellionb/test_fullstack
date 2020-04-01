@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApplicationService } from '../service/application.service';
 import Swal from 'sweetalert2';
 import { User } from '../model/user.model';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-admin',
@@ -32,7 +33,7 @@ export class AdminComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
-  openProjectList(ownerUsername) {
+  openProjectList(ownerUsername:string) {
     this.applicationService.userToLoad = ownerUsername;
     this.router.navigate(['/projects']);
   }
@@ -48,13 +49,18 @@ export class AdminComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        this.applicationService.deleteUser(id).subscribe();
-        let updatedUsers = this.users.filter((user) => user.id !== id);
-        this.users = updatedUsers;
-        Swal.fire(
-          'Deleted!',
-          'User has been deleted.',
-          'success'
+        this.applicationService.deleteUser(id).subscribe( data => {
+          let updatedUsers = this.users.filter((user) => user.id !== id);
+          this.users = updatedUsers;
+          Swal.fire(
+            'Deleted!',
+            'User has been deleted.',
+            'success'
+          );
+        },
+        error => {
+          Swal.fire(error);
+        }
         );
       }
     });

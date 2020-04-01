@@ -13,7 +13,7 @@ export class ApplicationService {
 
 
   private baseUrl = 'http://localhost:8080/application';
-  userToLoad: String;
+  userToLoad: string;
 
 
   private httpOptions = {
@@ -43,7 +43,7 @@ export class ApplicationService {
    * -> Il faut s'inspirer des fonctions ci-dessus
    */
 
-  saveProject(ownerUsername: string, name: string, amount: number, description: string) {
+  saveProject(ownerUsername: string, name: string, amount: number, description: string): Observable<Project> {
     const url = `${this.baseUrl}/saveProject`;
     return this.http.post<Project>(url, { ownerUsername, name, amount, description }, this.httpOptions);
   }

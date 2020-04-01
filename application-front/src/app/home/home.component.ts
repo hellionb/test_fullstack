@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
 
   getUser() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    if (this.user.type === UserType.ADMIN){
+    if (this.user.type === UserType.ADMIN) {
       this.showUserListBtn = true;
     }
     if (this.user === null) {
@@ -53,9 +53,7 @@ export class HomeComponent implements OnInit {
   // Cette fonction ne fait rien pour l'instant
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
-    this.applicationService.getProjects(this.user.username).subscribe((results => {
-      this.projects = results;
-    }));
+    this.applicationService.getProjects(this.user.username).subscribe(results => this.projects = results);
   }
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
@@ -67,8 +65,7 @@ export class HomeComponent implements OnInit {
     let name = this.name.value;
     let amount = this.amount.value;
     let description = this.description.value;
-    this.applicationService.saveProject(ownerUsername, name, amount, description).subscribe(project => { this.projects.push(project); }
-    );
+    this.applicationService.saveProject(ownerUsername, name, amount, description).subscribe(project => this.projects.push(project));
   }
 
   logout() {
@@ -77,8 +74,7 @@ export class HomeComponent implements OnInit {
     Swal.fire('Déconnexion réussie', 'Vous êtes à présent déconnecté', 'success');
   }
 
-
-  delete(id) {
+  delete(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
