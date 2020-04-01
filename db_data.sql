@@ -1,6 +1,3 @@
-
-TRUNCATE TABLE db_application.user;
-
 ALTER TABLE user ADD type varchar(45);
 
 INSERT INTO user (id, email, password, username, type ) VALUES
