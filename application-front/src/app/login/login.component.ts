@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
   }
 
   onSubmit() {
@@ -43,11 +43,8 @@ export class LoginComponent implements OnInit {
         Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
       },
       error => {
-        if (error instanceof HttpErrorResponse) {
-          Swal.fire('Veuillez vérifier votre nom d\'utilisateur et votre mot de passe');
-        } else {
-          Swal.fire(error.message);
-        }
-      });
+        Swal.fire('Veuillez vérifier votre nom d\'utilisateur et votre mot de passe', error);
+      }
+    );
   }
 }

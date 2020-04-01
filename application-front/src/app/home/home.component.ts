@@ -6,6 +6,7 @@ import { Project } from '../model/project.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserType } from '../model/userType';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -85,13 +86,15 @@ export class HomeComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        this.applicationService.deleteProject(id).subscribe();
-        let updatedProjects = this.projects.filter((project) => project.id !== id);
-        this.projects = updatedProjects;
-        Swal.fire(
-          'Deleted!',
-          'Your project has been deleted.',
-          'success'
+        this.applicationService.deleteProject(id).subscribe(
+          data => {
+            let updatedProjects = this.projects.filter(project => project.id !== id);
+            this.projects = updatedProjects;
+            Swal.fire('Deleted!', 'Your project has been deleted.', 'success');
+          },
+          error => {
+            Swal.fire('Error while deleting the project', error);
+          }
         );
       }
     });
