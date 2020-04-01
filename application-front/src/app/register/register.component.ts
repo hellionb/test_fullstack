@@ -48,10 +48,9 @@ export class RegisterComponent implements OnInit {
       Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
     },
       error => {
-        if (error) {
-          Swal.fire(error.message);
-        }
-      });
+        Swal.fire(error.message);
+      }
+    );
   }
 }
 

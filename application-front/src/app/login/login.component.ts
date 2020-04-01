@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     // Il faut afficher le bon message d'erreur avec une alerte via `Swal`
     this.applicationService.login(this.username.value, this.password.value).subscribe(
       user => {
-        console.log(typeof user.type);
         sessionStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['/home']);
         Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');

@@ -16,9 +16,7 @@ public class ProjectBean {
     public ProjectBean() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id;}
 
     public void setId() {
         this.id=id;
@@ -27,7 +25,6 @@ public class ProjectBean {
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -56,8 +53,5 @@ public class ProjectBean {
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
     }
-
-
-
 
 }
