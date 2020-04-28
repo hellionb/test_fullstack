@@ -3,17 +3,16 @@ package com.finalgo.application.api;
 import com.finalgo.application.bean.LoginBean;
 import com.finalgo.application.bean.ProjectBean;
 import com.finalgo.application.bean.RegisterBean;
+import com.finalgo.application.dao.ProjectDao;
 import com.finalgo.application.dao.UserDao;
 import com.finalgo.application.entity.Project;
 import com.finalgo.application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/application")
@@ -22,6 +21,8 @@ public class ApplicationRouting {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    ProjectDao projectDao;
 
     /**
      * Inscription d'un utilisateur
@@ -76,7 +77,16 @@ public class ApplicationRouting {
      */
     @RequestMapping(value = "/saveProject", method = RequestMethod.POST)
     public ResponseEntity<Project> saveProject(@RequestBody ProjectBean projectBean) {
-        Project project = null;
+        Project project = new Project();
+        project.setAmount(projectBean.getAmount());
+        project.setDescription(projectBean.getDescription());
+        project.setName(projectBean.getName());
+        project.setOwnerUsername(projectBean.getOwnerUsername());
+        //vérifier si le owner existe
+        if(!userDao.userExists("",project.getOwnerUsername())){
+            return new ResponseEntity<>(project, HttpStatus.BAD_REQUEST);
+        }
+        projectDao.create(project);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
 
@@ -86,4 +96,8 @@ public class ApplicationRouting {
       Le seul paramètre sera un `ownerUsername`
       On veut une List<Project> récupérée de la table 'Project'
      */
+    @RequestMapping(value = "/getProjects", method = RequestMethod.GET)
+    public ResponseEntity<List<Project>> listProjects(@RequestParam String ownerUsername) {
+        return new ResponseEntity<>(projectDao.getByOwnerusername(ownerUsername), HttpStatus.OK);
+    }
 }
