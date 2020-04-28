@@ -10,6 +10,10 @@ public class UserDao extends AbstractGenericDao<User> {
         super(User.class);
     }
 
+    public boolean userExists(String email, String username){
+        String query = "from User where username = '"+username+"' or email = '"+email+"'";
+        return createOneItemSelectQuery(query)!=null;
+    }
     /**
      * Récupèrer l'utilisateur correspondant aux paramètres suivant:
      * @param username
@@ -18,8 +22,9 @@ public class UserDao extends AbstractGenericDao<User> {
      *
      * TODO Implémenter la requête Hibernate/SQL
      */
+    //Petite proposition : utiliser spring data
     public User findWithCredentials(String username, String password) {
-        String query = "";
+        String query = "from User where username = '"+username+"' and password = '"+password+"'";
         return createOneItemSelectQuery(query);
     }
 }

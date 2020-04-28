@@ -39,6 +39,8 @@ public class ApplicationRouting {
         user.setUsername(registerBean.getUsername());
         user.setPassword(registerBean.getPassword());
         user.setEmail(registerBean.getEmail());
+        if (userDao.userExists(registerBean.getEmail(),registerBean.getUsername()))
+            return new ResponseEntity<>(user, HttpStatus.CONFLICT);
         userDao.create(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -56,7 +58,10 @@ public class ApplicationRouting {
     public ResponseEntity<User> login(@RequestBody LoginBean loginBean) {
         // TODO Implémenter la fonction `userDao.findWithCredentials` ci-dessous
         User user = userDao.findWithCredentials(loginBean.getUsername(), loginBean.getPassword());
-        return new ResponseEntity<>(user, HttpStatus.NOT_FOUND);
+        return user==null?
+                new ResponseEntity<>(null, HttpStatus.NOT_FOUND)
+                :
+                new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /**
