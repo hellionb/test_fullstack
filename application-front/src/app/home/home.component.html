@@ -19,7 +19,8 @@
     <!-- Tableau contenant les projets -->
     <!-- TODO 1: Lier le tableau ci-dessous avec `this.projects` pour afficher un projet par ligne -->
     <!-- TODO 2: Masquer ce tableau et afficher un message indiquant l'absence de projets -->
-    <table class="project-table">
+    <div *ngIf="projects.length>0;else pasdeprojet">
+      <table *ngFor="let project of projects" class="project-table">
       <thead>
         <tr>
           <!-- project.name -->
@@ -33,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let project of projects">
+        <tr>
           <td>{{project.name}}</td>
           <td>{{project.amount}}</td>
           <td>{{project.description}}</td>
@@ -41,5 +42,9 @@
         </tr>
       </tbody>
     </table>
+    </div>
+  <ng-template #pasdeprojet>
+    Aucun projet
+  </ng-template>
   </div>
 </div>
