@@ -20,7 +20,7 @@
     <!-- TODO 1: Lier le tableau ci-dessous avec `this.projects` pour afficher un projet par ligne -->
     <!-- TODO 2: Masquer ce tableau et afficher un message indiquant l'absence de projets -->
     <div *ngIf="projects.length>0;else pasdeprojet">
-      <table *ngFor="let project of projects" class="project-table">
+      <table class="project-table">
       <thead>
         <tr>
           <!-- project.name -->
@@ -33,7 +33,7 @@
           <th>Propriétaire</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngFor="let project of projects">
         <tr>
           <td>{{project.name}}</td>
           <td>{{project.amount}}</td>

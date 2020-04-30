@@ -18,7 +18,6 @@ public class Project implements Serializable {
     private Integer amount;
     @Column(length = 8191)
     private String description;
-    //Petite proposition : utiliser les @ManyToOne
     private String ownerUsername;
 
     public Integer getId() {

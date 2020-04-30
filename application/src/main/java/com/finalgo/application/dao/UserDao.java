@@ -22,7 +22,6 @@ public class UserDao extends AbstractGenericDao<User> {
      *
      * TODO Implémenter la requête Hibernate/SQL
      */
-    //Petite proposition : utiliser spring data
     public User findWithCredentials(String username, String password) {
         String query = "from User where username = '"+username+"' and password = '"+password+"'";
         return createOneItemSelectQuery(query);
