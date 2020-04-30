@@ -1,6 +1,6 @@
 <div class="center">
   <button class="btn btn-secondary float-right" (click)="logout()">Sign out</button>
-  
+
   <div class="container project-form">
     <form autocomplete="off" class="form-signin" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <h3 class="h3 mb-3 font-weight-normal">Nouveau projet</h3>
@@ -13,7 +13,7 @@
       <button class="btn btn-lg btn-primary custom-btn btn-block" type="submit" [disabled]="formGroup.invalid">Créer</button>
     </form>
   </div>
-  
+
   <div>
     <h3>Projets</h3>
     <!-- Tableau contenant les projets -->
@@ -33,11 +33,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
-          <td>test</td>
+        <tr *ngFor="let project of projects">
+          <td>{{project.name}}</td>
+          <td>{{project.amount}}</td>
+          <td>{{project.description}}</td>
+          <td>{{project.ownerUsername}}</td>
         </tr>
       </tbody>
     </table>

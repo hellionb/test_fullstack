@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
+import {Project} from "../model/project.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,9 @@ export class ApplicationService {
    * -> Il faut s'inspirer des fonctions ci-dessus
    */
   saveProject() { }
-  getProjects() { }
+  getProjects(username: string) {
+    const url = this.baseUrl + '/getProjects';
+    return this.http.get<Project[]>(url+"?ownerUsername="+username);
+  }
 
 }
