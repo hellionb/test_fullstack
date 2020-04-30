@@ -34,7 +34,10 @@ export class ApplicationService {
    * TODO Implémenter les requêtes pour la sauvegarde et le chargement des projets
    * -> Il faut s'inspirer des fonctions ci-dessus
    */
-  saveProject() { }
+  saveProject(name: string, amount: string, description: string, ownerUsername : string) {
+    const url = this.baseUrl + '/saveProject';
+    return this.http.post<Project>(url, { name, amount, description,  ownerUsername}, this.httpOptions);
+  }
   getProjects(username: string) {
     const url = this.baseUrl + '/getProjects';
     return this.http.get<Project[]>(url+"?ownerUsername="+username);

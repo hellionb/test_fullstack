@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   // -> Il faut remplir la liste de projet `this.projects`
   getUserProjects() {
     this.projects = [];
+    if(this.user !== null){
     this.applicationService.getProjects(this.user.username).subscribe(
       (projects) => {
         this.projects = projects;
@@ -58,6 +59,7 @@ export class HomeComponent implements OnInit {
         Swal.fire('Erreur de chargement de projets', 'Erreur de chargement des projets', "error");
       }
     );
+    }
   }
 
   // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
@@ -65,10 +67,15 @@ export class HomeComponent implements OnInit {
   // -> Ne pas oublier d'ajouter l'username de l'utilisateur
   // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
   onSubmit() {
-    console.log(this.name.value);
-    console.log(this.amount.value);
-    console.log(this.description.value);
-    this.applicationService.saveProject();
+    const {name,amount,description} = this;
+    this.applicationService.saveProject(name.value,amount.value,description.value,this.user.username).subscribe(
+      (project) => {
+        this.projects.push(project);
+      },
+      response => {
+        //erreurs
+      }
+    );
   }
 
   logout() {
