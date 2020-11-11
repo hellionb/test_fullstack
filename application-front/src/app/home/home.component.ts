@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../model/user.model';
-import { Router } from '@angular/router';
-import { ApplicationService } from '../service/application.service';
-import { Project } from '../model/project.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../model/user.model';
+import {Router} from '@angular/router';
+import {ApplicationService} from '../service/application.service';
+import {Project} from '../model/project.model';
+import {FormControl, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,12 +14,13 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
 
   private user: User;
-  private projects: Project[];
+  private projects: any;
 
   formGroup: FormGroup;
   name: FormControl;
   amount: FormControl;
   description: FormControl;
+  ownerUsername: string;
 
   constructor(private router: Router, private applicationService: ApplicationService) {
     this.name = new FormControl('');
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.getUserProjects();
+    this.getUserProjects(JSON.parse(sessionStorage.getItem('user')));
   }
 
   getUser() {
@@ -45,23 +46,36 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // TODO 1: Récupérer la liste des projets lié à cette utilisateur
-  // Cette fonction ne fait rien pour l'instant
-  // -> Il faut remplir la liste de projet `this.projects`
-  getUserProjects() {
+  /**
+   * call getProjects service to get all project of a user
+   * @param username
+   */
+  getUserProjects(username: string) {
     this.projects = [];
-    this.applicationService.getProjects();
+    this.ownerUsername = JSON.parse(sessionStorage.getItem('user'));
+    this.applicationService.getProjects(this.ownerUsername)
+      .subscribe((response) => {
+          for (let r in response.body) {
+            console.log('reponsesss : ' + response.body[r]['name']);
+            this.projects.push(response.body[r]);
+          }
+        }, (error) => { //
+          // console.log(error.status);
+          Swal.fire('Problème affichage ', 'Oops', 'warning');
+        });
   }
 
-  // TODO 2: Sauvegarder les informations d'un projet grâce formulaire
-  // -> Appeler le backend pour créer le projet avec les bonnes informations
-  // -> Ne pas oublier d'ajouter l'username de l'utilisateur
-  // -> Après avoir sauvegarder le projet, l'ajouter  dans `this.projects`
   onSubmit() {
-    console.log(this.name.value);
-    console.log(this.amount.value);
-    console.log(this.description.value);
-    this.applicationService.saveProject();
+    this.ownerUsername = JSON.parse(sessionStorage.getItem('user'));
+    this.applicationService.saveProject(this.name.value, this.amount.value, this.description.value, this.ownerUsername)
+      .subscribe((response) => {
+          console.log(response.status);
+          Swal.fire('Enregistrement réussi !', 'Projet ajouté', 'success');
+        },
+        (error) => { //
+          // console.log(error.status);
+          Swal.fire('Enregistrement échoué !', 'Oops', 'warning');
+        });
   }
 
   logout() {

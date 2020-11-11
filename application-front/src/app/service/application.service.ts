@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user.model';
@@ -13,27 +13,45 @@ export class ApplicationService {
     headers: new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json'
-    })
+    }),
+    observe: 'response' as 'response'
   };
 
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): Observable<User> {
+  login(username: string, password: string): Observable<any> {
     const url = this.baseUrl + '/login';
-    return this.http.post<User>(url, { username, password }, this.httpOptions);
+    return this.http.post<User>(url, {username, password}, this.httpOptions);
   }
 
-  register(username: string, password: string, email: string): Observable<User> {
+  register(username: string, password: string, email: string): Observable<any> {
     const url = this.baseUrl + '/register';
-    return this.http.post<User>(url, { username, password, email }, this.httpOptions);
+    return this.http.post<User>(url, {username, password, email}, this.httpOptions);
   }
 
   /**
-   * TODO Implémenter les requêtes pour la sauvegarde et le chargement des projets
-   * -> Il faut s'inspirer des fonctions ci-dessus
+   * save new project
+   * @param name
+   * @param amount
+   * @param description
+   * @param ownerUsername
    */
-  saveProject() { }
-  getProjects() { }
+  saveProject(name: string, amount: string, description: string, ownerUsername: string): Observable<any> {
+    return this.http.post<User>(this.baseUrl + '/saveProject', {
+      name,
+      amount,
+      description,
+      ownerUsername
+    }, this.httpOptions);
+  }
+
+  /**
+   * get all projects by username
+   * @param username
+   */
+  getProjects(username: string): Observable<any> {
+    return this.http.get<User>(this.baseUrl + '/getProjects?ownerUsername=' + username, this.httpOptions);
+  }
 
 }

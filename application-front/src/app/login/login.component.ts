@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApplicationService } from '../service/application.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ApplicationService} from '../service/application.service';
+import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,15 +28,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // manage login
   onSubmit() {
-    // TODO Gérer les échecs de connexion
-    // Losque les informations ne sont pas bonnes et que le backend renvoie une erreur,
-    // Il faut afficher le bon message d'erreur avec une alerte via `Swal`
-    this.applicationService.login(this.username.value, this.password.value).subscribe((user) => {
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['/home']);
-      Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
-    });
-  }
+    this.applicationService.login(this.username.value, this.password.value).subscribe(
+      (response) => {
+        sessionStorage.setItem('user', JSON.stringify(response.body['username']));
+        this.router.navigate(['/home']);
+        Swal.fire('Connexion réussie', 'Vous êtes à présent connecté', 'success');
+      },
+      (error) => { //
+        // console.log(error.status);
+        Swal.fire('Connexion échouée', 'Vous n\'êtes pas connecté, veuillez réessayer', 'warning');
 
+      });
+  }
 }

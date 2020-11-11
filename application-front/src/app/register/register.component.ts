@@ -31,16 +31,33 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  // register new user
   onSubmit() {
-    // TODO Gérer les échecs d'inscription
-    // Losqu'un utilisateur existe déjà, cette requête ne devrait pas fonctionner,
-    // Il faut donc afficher le bon message d'erreur avec une alerte via `Swal`
-    // Il faut avoir un formulaire valide: mail valide et pas de champs vides
-    this.applicationService.register(this.username.value, this.password.value, this.email.value).subscribe((user) => {
-      sessionStorage.setItem('user', JSON.stringify(user));
-      this.router.navigate(['home']);
-      Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
-    });
+    // validate email
+    if ((this.validateEmail(this.email.value)) && (this.username) && (this.password)) {
+      this.applicationService.register(this.username.value, this.password.value, this.email.value).subscribe((response) => {
+          sessionStorage.setItem('user', JSON.stringify(response.body['username']));
+          this.router.navigate(['home']);
+          Swal.fire('Inscription réussie', 'Vous êtes à présent connecté', 'success');
+        },
+        (error) => { //
+          // console.log(error.status);
+          Swal.fire('Inscription échouée !', 'Cet utilisateur exite déjà', 'warning');
+        });
+    } else {
+      Swal.fire('Format incorrect', 'Veuillez corriger votre formulaire', 'warning');
+    }
+  }
+
+  // source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  /**
+   * validate email format
+   * @param email
+   */
+  validateEmail(email) {
+    // tslint:disable-next-line:max-line-length
+    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regularExpression.test(String(email).toLowerCase());
   }
 
 }
